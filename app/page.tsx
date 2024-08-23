@@ -1,8 +1,15 @@
 import axios from "axios";
- 
+import { PrismaClient } from "@prisma/client";
+import client from "@/db"
+import { NextResponse } from "next/server";
+
 async function getUserDetails() {
-  const response = await axios.get("http://localhost:3000/api/user")
-  return response.data
+   const user = await client.user.findFirst();
+
+   return {
+    email : user?.username,
+    name : "kushal"
+   }
 }
 
 export default async function Home() {
